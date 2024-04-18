@@ -1,3 +1,9 @@
+## Non-standard stuff
+# Sensitive Info
+botconfig.json
+botconfig.json_
+
+## Standard Node gitignore:
 # Logs
 logs
 *.log
