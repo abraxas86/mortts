@@ -1,8 +1,6 @@
 const { RefreshingAuthProvider } = require('@twurple/auth');
 const { ChatClient } = require('@twurple/chat');
 const { Server } = require('socket.io');
-const http = require('http');
-const cors = require('cors');
 const express = require('express');
 const path = require('path');
 
@@ -101,7 +99,7 @@ async function initializeSocket(server, config) {
 
     io.on('connection', (socket) => {
         console.log('Client connection established. THIS IS NOT APPROVED BY THE VATICAN!');
-        
+
         const greeting = "T̴̼̀̀h̶̜͛ë̴͔̗́͝ ̵̩́s̴̺͑̌ȩ̸̊r̵͔̤͂v̷̜̳̿ȅ̶͎r̶̛̮̫ ̴͉̳͗̈́ś̸͇͇́ě̶̻͕͝n̵̬̅̚s̸̩͝e̸͙̋s̴̘̱̽ ̴̢̱̇y̷͎̍o̵̺̺͊u̵̼̪̅̀r̷̯͒͝ ̷̢̻͝p̴̱̈́r̴̰̂e̸̺͌͝ṡ̴̹̋ẻ̶̗̱̑n̶͈̅c̶͉̔ė̶̝";
         socket.emit('hello', greeting);
 
