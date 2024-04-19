@@ -76,7 +76,7 @@ async function main() {
         // Handle incoming messages
         handleMessages(client, io);
 
-        console.log('M O R T I S  engaged');
+        console.log('--- M O R T I S ---');
     } catch (error) {
         console.error('An error occurred in main():', error);
     }
@@ -103,7 +103,7 @@ async function initializeSocket(server, config) {
         console.log('Client connection established. THIS IS NOT APPROVED BY THE VATICAN!');
 
         // Example: Emit a 'hello' event to the client
-        const greeting = "A gun with one bullet!";
+        const greeting = "T̴̼̀̀h̶̜͛ë̴͔̗́͝ ̵̩́s̴̺͑̌ȩ̸̊r̵͔̤͂v̷̜̳̿ȅ̶͎r̶̛̮̫ ̴͉̳͗̈́ś̸͇͇́ě̶̻͕͝n̵̬̅̚s̸̩͝e̸͙̋s̴̘̱̽ ̴̢̱̇y̷͎̍o̵̺̺͊u̵̼̪̅̀r̷̯͒͝ ̷̢̻͝p̴̱̈́r̴̰̂e̸̺͌͝ṡ̴̹̋ẻ̶̗̱̑n̶͈̅c̶͉̔ė̶̝";
         socket.emit('hello', greeting);
 
         socket.on('disconnect', () => {
@@ -147,7 +147,7 @@ class TwitchError extends Error {
 }
 
 console.log('\n\n\n');
-console.log("--- M O R T T S ---");
+console.log("--- S T A R T I N G ---");
 main();
 
 console.log("Exiting...")
