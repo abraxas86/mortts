@@ -101,8 +101,7 @@ async function initializeSocket(server, config) {
 
     io.on('connection', (socket) => {
         console.log('Client connection established. THIS IS NOT APPROVED BY THE VATICAN!');
-
-        // Example: Emit a 'hello' event to the client
+        
         const greeting = "T̴̼̀̀h̶̜͛ë̴͔̗́͝ ̵̩́s̴̺͑̌ȩ̸̊r̵͔̤͂v̷̜̳̿ȅ̶͎r̶̛̮̫ ̴͉̳͗̈́ś̸͇͇́ě̶̻͕͝n̵̬̅̚s̸̩͝e̸͙̋s̴̘̱̽ ̴̢̱̇y̷͎̍o̵̺̺͊u̵̼̪̅̀r̷̯͒͝ ̷̢̻͝p̴̱̈́r̴̰̂e̸̺͌͝ṡ̴̹̋ẻ̶̗̱̑n̶͈̅c̶͉̔ė̶̝";
         socket.emit('hello', greeting);
 
