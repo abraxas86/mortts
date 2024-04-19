@@ -117,11 +117,7 @@ async function handleMessages(client, io) {
     client.onMessage(async (channel, username, message, msgObject) => {
         console.log(`(${channel}) [${username}]: ${message}`);
 
-        io.on('hello', (socket) => {
-            console.log('Client connected!');
-        });
-
-        if (/^!mort(ts|is|y)/i.test(message)) {
+        if (/^!mor(bis|tts|ts|tis|ty)/i.test(message)) {
             const pitch = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
             const speed = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
             const singMode = Math.floor(Math.random() * 2) === 0 ? true : false;

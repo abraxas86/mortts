@@ -54,10 +54,11 @@
         socket.on('mortts', packet => {
             const param = JSON.parse(packet);
             
-             //If you want to use params set from the server:
-            //var mouth = new SamJs({speed: param.speed, pitch: param.pitch, singmode: param.singmode});
+            //If you want to use params set from the server (the random function over there makes this a bit much, tbh):
+            var mouth = new SamJs({speed: param.speed, pitch: param.pitch, singmode: param.singmode});
 
-            var mouth = new SamJs({speed: 90, pitch: 90, singmode: false});
+            //If you want to override the packet speed/pitch/singmode, uncomment and modify the line below:
+            //var mouth = new SamJs({speed: 90, pitch: 90, singmode: false});
             
             console.log(param)
             //Here's an example of getting it to speak:
@@ -85,7 +86,7 @@
     <div>
         <span><h1 id="username"></h1></span>
         <br/><br/>
-        <span id="message" style="font-size:100pt;"></span>
+        <span id="message" style="font-size:50pt;"></span>
     </div>
 
 <script>
