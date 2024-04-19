@@ -8,5 +8,28 @@
     "sam-js": "^0.2.1",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5"
-  }
+  },
+  "name": "mortts",
+  "version": "1.0.0",
+  "description": "A TTS bot inspired by the game 'The Unholy Trinity'",
+  "main": "mortts-server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abraxas86/mortts.git"
+  },
+  "keywords": [
+    "tts",
+    "twitch",
+    "mortis"
+  ],
+  "author": "abraxas86",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abraxas86/mortts/issues"
+  },
+  "homepage": "https://github.com/abraxas86/mortts#readme"
 }
