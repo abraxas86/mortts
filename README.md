@@ -1,6 +1,6 @@
 # MorTTS
 
-Ever play Unholy Trinity and wish you could have that "MORTIS" style TTS in your twitch chat?  This is what you need!  It takes Discordier's SamJs (Software Automatic Mouth), a JS port of the C64 voice synth and te same package used to generate the voies in the Unholy Trinity games - and Twurple for Twitch integration, and smashes them together.  Data is sent via Socket-IO Socket Server, and rendered in an html page rendered via ejs template.
+Ever play Unholy Trinity and wish you could have that "MORTIS" style TTS in your twitch chat?  This is what you need!  It takes Discordier's SamJs (Software Automatic Mouth), a JS port of the C64 voice synth and the same package used to generate the voices in the Unholy Trinity games - and Twurple for Twitch integration, and smashes them together.  Data is sent via Socket-IO Socket Server, and rendered in an html page rendered via ejs template through Express.
 
 
 ## Setup:
