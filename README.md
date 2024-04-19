@@ -23,6 +23,7 @@ Ever play Unholy Trinity and wish you could have that "MORTIS" style TTS in your
 5. Point a browser source to the same IP address and Port.  You may need to "Interact" with this layer to allow the sound to work
 6. Kill the script with ctrl+c
 
+The bot is triggered in-chat with `!mortis` or `!mortts` or a few other things you'll see if you dig into the server code a bit ;)
 
    *Note: This has only been tested locally on a Linux computer.  YMMV
 
