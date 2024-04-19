@@ -12,7 +12,7 @@ const app = express();
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-// send sam-js library over to browser
+// send sam-js library over to browser 
 app.use('/sam-js', express.static(path.join(__dirname, 'node_modules', 'sam-js', 'dist')));
 
 async function startServer(hAddress, hPort) {
@@ -129,8 +129,10 @@ async function handleMessages(client, io) {
             const speed = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
             const singMode = Math.floor(Math.random() * 2) === 0 ? true : false;
 
+            const msg = message.split(' ').slice(1).join(' ');
+
             // Process incoming message and emit it
-            const packet = JSON.stringify({ username, message, speed, pitch, singMode });
+            const packet = JSON.stringify({ username, msg, speed, pitch, singMode });
             console.log(packet);
             io.emit('mortts', packet);
         }

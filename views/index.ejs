@@ -26,6 +26,21 @@
             socket.emit('hello', greeting);
         });
 
+        socket.on('mortts', packet => {
+            const param = JSON.parse(packet);
+            
+             //If you want to use params set from the server:
+            //var mouth = new SamJs({speed: param.speed, pitch: param.pitch, singmode: param.singmode});
+
+            var mouth = new SamJs({speed: 90, pitch: 90, singmode: false});
+            
+            console.log(param)
+            //Here's an example of getting it to speak:
+            //mouth.speak(`${param.username} says ${param.msg}`);
+
+            mouth.speak(param.msg);
+        });
+
         socket.on('disconnect', () => {
             console.log('Disconnected from socket server');
         });
