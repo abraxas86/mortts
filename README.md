@@ -25,3 +25,6 @@ Ever play Unholy Trinity and wish you could have that "MORTIS" style TTS in your
 
 
    *Note: This has only been tested locally on a Linux computer.  YMMV
+
+
+## NOTE: You may need to click on the webpage after it loads for the audio to play. From what I understand, it's a rule put in place by browsers to prevent rogue pages from making noises.
