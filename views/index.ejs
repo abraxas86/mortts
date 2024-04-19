@@ -7,29 +7,32 @@
 
     <!-- Include the Socket.IO client library -->
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="/sam-js/samjs.min.js"></script>
 
     <script>
 
-        app.get('/', (req,res) =>{
-            const data{
-                hAddress: hAddress,
-                hPort: hPort
-            }
-        });
+        const sAddress = '<%= socketAddress %>';
+        const sPort = '<%= socketPort %>';
 
-        const sAddress = data.hAddress;
-        const sPort = data.hPort;
+        console.log(`Server set to: ${sAddress}:${sPort}`);
 
         // Initialize Socket.IO client
-        const socket = io(`${sAddress}:${sPort}`);
+        const socket =  io(`${sAddress}:${sPort}`);
+
         // Event listeners
         socket.on('connect', () => {
+            const greeting = "A client connects with one bullet!";
             console.log('Connected to socket server');
-            socket.emit('hello');
+            socket.emit('hello', greeting);
         });
 
         socket.on('disconnect', () => {
             console.log('Disconnected from socket server');
+        });
+
+        // Listen for the 'hello' event
+        socket.on('hello', (data) => {
+            console.log(data); // Print the greeting message received from the server
         });
     </script>
 </head>

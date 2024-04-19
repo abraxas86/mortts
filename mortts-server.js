@@ -12,6 +12,9 @@ const app = express();
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
+// send sam-js library over to browser
+app.use('/sam-js', express.static(path.join(__dirname, 'node_modules', 'sam-js', 'dist')));
+
 async function startServer(hAddress, hPort) {
     return new Promise((resolve, reject) => {
         // Set up Express server to listen on the specified host address and port
@@ -50,7 +53,6 @@ async function connectToTwitch(config, channels) {
     return { client, authProvider };
 }
 
-
 async function main() {
     try {
         // Initialize config and other necessary setup here...
@@ -63,23 +65,23 @@ async function main() {
         console.log('Connecting to Twitch...');
         const { client, authProvider } = await connectToTwitch(config, config.channels);
 
-        // Initialize Socket.IO server
+        // Initialize Express server
+        console.log('Initializing Express server...');
+        const server = await startServer(config.serverAddress, config.serverPort);
+
+        // Initialize Socket.IO server using the same HTTP server instance
         console.log('Initializing socket server...');
-        const io = await initializeSocket(config);
+        const io = await initializeSocket(server, config);
 
         // Handle incoming messages
         handleMessages(client, io);
 
-        // Start web server
-        console.log('Starting web server...');
-        await startServer(config.serverAddress, config.serverPort);
-
         console.log('M O R T I S  engaged');
-
     } catch (error) {
         console.error('An error occurred in main():', error);
     }
 }
+
 
 async function servePage(hAddress, hPort){
     const data = {
@@ -90,18 +92,26 @@ async function servePage(hAddress, hPort){
 }
 
 
-async function initializeSocket(config) {
-    const server = http.createServer();
+async function initializeSocket(server, config) {
     const io = new Server(server, {
         cors: {
-            origin:`${config.serverAddress}:${config.serverPort}`
+            origin: `${config.serverAddress}:${config.serverPort}`
         }
     });
 
-    server.listen(config['socket-port'], config.serverAddress, () => {
-        console.log(`mortts-server listening on ${config.serverAddress}:${config.serverPort}\n\n`);
+    io.on('connection', (socket) => {
+        console.log('Client connection established. THIS IS NOT APPROVED BY THE VATICAN!');
+
+        // Example: Emit a 'hello' event to the client
+        const greeting = "A gun with one bullet!";
+        socket.emit('hello', greeting);
+
+        socket.on('disconnect', () => {
+            console.log('Client disconnect. THE VATICAN APPROVES');
+        });
     });
 
+    console.log(`Socket.IO server initialized`);
     return io;
 }
 
@@ -137,4 +147,5 @@ class TwitchError extends Error {
 console.log('\n\n\n');
 console.log("--- M O R T T S ---");
 main();
+
 console.log("Exiting...")
