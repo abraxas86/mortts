@@ -15,13 +15,11 @@ app.use('/sam-js', express.static(path.join(__dirname, 'node_modules', 'sam-js',
 
 async function startServer(hAddress, hPort) {
     return new Promise((resolve, reject) => {
-        // Set up Express server to listen on the specified host address and port
         const server = app.listen(hPort, hAddress, () => {
             console.log(`Web server running on ${hAddress}:${hPort}`);
             resolve(server);
         });
 
-        // Serve the index.html file with embedded data
         app.get('/', (req, res) => {
             const data = {
                 socketAddress: hAddress,
@@ -29,11 +27,8 @@ async function startServer(hAddress, hPort) {
             };
             res.render('index', data);
         });
-        
     });
 }
-
-
 
 async function connectToTwitch(config, channels) {
     const authProvider = new RefreshingAuthProvider({
@@ -53,25 +48,21 @@ async function connectToTwitch(config, channels) {
 
 async function main() {
     try {
-        // Initialize config and other necessary setup here...
-        console.log('Entering main...')
+        console.log('Entering main...');
 
-        // Read config file
-        const config = await readConfig.readConfigFile('./botconfig.json');
+        // Use absolute path for the config file
+        const configPath = path.join(__dirname, 'botconfig.json');
+        const config = await readConfig.readConfigFile(configPath);
 
-        // Connect to Twitch chat
         console.log('Connecting to Twitch...');
         const { client, authProvider } = await connectToTwitch(config, config.channels);
 
-        // Initialize Express server
         console.log('Initializing Express server...');
         const server = await startServer(config.serverAddress, config.serverPort);
 
-        // Initialize Socket.IO server using the same HTTP server instance
         console.log('Initializing socket server...');
         const io = await initializeSocket(server, config);
 
-        // Handle incoming messages
         handleMessages(client, io);
 
         console.log('--- M O R T I S ---');
@@ -80,15 +71,14 @@ async function main() {
     }
 }
 
-
-async function servePage(hAddress, hPort){
+async function servePage(hAddress, hPort) {
     const data = {
         serverAddress: hAddress,
         serverPort: hPort
     };
 
+    // Placeholder function
 }
-
 
 async function initializeSocket(server, config) {
     const io = new Server(server, {
@@ -112,19 +102,17 @@ async function initializeSocket(server, config) {
     return io;
 }
 
-
 async function handleMessages(client, io) {
     client.onMessage(async (channel, username, message, msgObject) => {
         console.log(`(${channel}) [${username}]: ${message}`);
 
         if (/^!mor(bis|tts|ts|tis|ty)/i.test(message)) {
-            const pitch = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
-            const speed = Math.floor(Math.random() * (150 - 10 + 1)) + 10;
-            const singMode = Math.floor(Math.random() * 2) === 0 ? true : false;
+            const pitch = 90;
+            const speed = 90;
+            const singMode = false;
 
             const msg = message.split(' ').slice(1).join(' ');
 
-            // Process incoming message and emit it
             const packet = JSON.stringify({ username, msg, speed, pitch, singMode });
             console.log(packet);
             io.emit('mortts', packet);
@@ -143,4 +131,5 @@ console.log('\n\n\n');
 console.log("--- S T A R T I N G ---");
 main();
 
-console.log("Exiting...")
+console.log("Exiting...");
+
